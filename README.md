@@ -36,3 +36,5 @@ Extra:
 - Themes (chalk?)
 - Languages
 - Different layout depending on horizontal/vertical screen
+
+![](user_experience_sketches.png?raw=true)
