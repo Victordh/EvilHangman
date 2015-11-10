@@ -1,6 +1,6 @@
 # EvilHangman
-Victor den Haan - 10118039
-Final App for Virtual App Studio
+Victor den Haan - 10118039  
+Final App for Virtual App Studio  
 Evil Hangman game - This app tries to prevent the user from guessing the word
 within the amount of guesses allowed.
 
