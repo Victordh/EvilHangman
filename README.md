@@ -38,9 +38,9 @@ Extra:
 - Languages
 - Different layout depending on horizontal/vertical screen
 
-![](images/user_experience_sketches.png?raw=true)
-![](images/menu_activity.png?raw=true)
-![](images/gameplay_activity.png?raw=true)
-![](images/settings_activity.png?raw=true)
-![](images/high_scores_activity.png?raw=true)
-![](images/instructions_activity.png?raw=true)
+![](images/user_experience_sketches.png?raw=true)  
+![](images/menu_activity.png?raw=true)  
+![](images/gameplay_activity.png?raw=true)  
+![](images/settings_activity.png?raw=true)  
+![](images/high_scores_activity.png?raw=true)  
+![](images/instructions_activity.png?raw=true)  
