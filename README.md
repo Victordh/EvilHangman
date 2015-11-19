@@ -44,4 +44,3 @@ Extra:
 ![](images/settings_activity.png?raw=true)
 ![](images/high_scores_activity.png?raw=true)
 ![](images/instructions_activity.png?raw=true)
-![](images/model_classes.png?raw=true)
