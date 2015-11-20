@@ -37,6 +37,7 @@ Extra:
 - Themes (chalk?)
 - Languages
 - Different layout depending on horizontal/vertical screen
+- Colour blind mode
 
 ![](images/user_experience_sketches.png?raw=true)  
 ![](images/menu_activity.png?raw=true)  
