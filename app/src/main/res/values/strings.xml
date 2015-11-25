@@ -1,0 +1,11 @@
+<resources>
+    <!--MenuActivity-->
+    <string name="app_name">Evil Hangman</string>
+    <string name="menu_evil_title">Evil Hangman</string>
+    <string name="new_game_button">New Game</string>
+    <string name="instructions_button">Instructions</string>
+    <string name="high_scores_button">High scores</string>
+    <string name="settings_button">Settings</string>
+
+    <string name="back_to_menu_button">Menu</string>
+</resources>
