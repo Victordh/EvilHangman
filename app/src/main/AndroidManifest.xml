@@ -15,7 +15,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".GameplayActivity" >
+        <activity android:name=".GameplayActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize">
         </activity>
         <activity android:name=".InstructionsActivity" >
         </activity>

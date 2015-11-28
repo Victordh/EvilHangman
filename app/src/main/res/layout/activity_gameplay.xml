@@ -10,11 +10,103 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.example.bubbles.evilhangman.GameplayActivity">
 
-    <Button
-        style="@style/back_button"
-        android:id="@+id/back_to_menu_button"
-        android:text="@string/back_to_menu_button"
-        android:onClick="back_to_menu_button_click"
-    />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.example.bubbles.evilhangman.Views.CrayonButton
+                style="@style/back_button"
+                android:id="@+id/back_to_menu_button"
+                android:text="@string/back_to_menu_button"
+                android:onClick="back_to_menu_button_click"
+                />
+
+            <com.example.bubbles.evilhangman.Views.CrayonTextView
+                style="@style/standard_textview"
+                android:id="@+id/guesses_left"
+                android:textSize="48sp"
+                android:text="@string/guesses_left"
+                android:layout_below="@id/back_to_menu_button"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:textAlignment="center"
+            />
+        </LinearLayout>
+        <ImageView
+            android:id="@+id/hangman"
+            android:src="@drawable/hangman2"
+            android:layout_centerHorizontal="true"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+        />
+
+        <com.example.bubbles.evilhangman.Views.CrayonTextView
+            style="@style/standard_textview"
+            android:id="@+id/letters_tried"
+            android:textSize="22sp"
+            android:text="@string/letters_tried"
+            android:textAlignment="center"
+            android:layout_width="70dp"
+            android:layout_alignParentRight="true"
+        />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <com.example.bubbles.evilhangman.Views.CrayonTextView
+            android:id="@+id/the_word"
+            android:text="@string/letter_placeholders"
+            android:textSize="48sp"
+            android:textColor="#D6DED5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+        />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <com.example.bubbles.evilhangman.Views.CrayonEditText
+                android:id="@+id/letter_input"
+                android:hint="@string/letter_input_hint"
+                android:textColorHint="#D6DED5"
+                android:imeOptions="flagNoExtractUi"
+                android:background="@android:color/transparent"
+                android:cursorVisible="false"
+                android:inputType="textNoSuggestions"
+                android:textSize="18sp"
+                android:textColor="#D6DED5"
+                android:textAlignment="center"
+                android:maxLength="1"
+                android:layout_height="40dp"
+                android:layout_width="wrap_content"
+            />
+
+            <com.example.bubbles.evilhangman.Views.CrayonButton
+                style="@style/game_button"
+                android:id="@+id/guess_button"
+                android:text="@string/guess_button"
+                android:onClick="guess_button_click"
+            />
+
+            <com.example.bubbles.evilhangman.Views.CrayonButton
+                style="@style/game_button"
+                android:id="@+id/new_word_button"
+                android:text="@string/new_word_button"
+                android:onClick="new_word_button_click"
+            />
+        </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>
