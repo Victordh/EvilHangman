@@ -1,7 +1,7 @@
 <resources>
     <!--MenuActivity-->
     <string name="app_name">Evil Hangman</string>
-    <string name="menu_evil_title">Evil Hangman</string>
+    <string name="menu_evil_title"><font color="RED">Evil </font>Hangman</string>
     <string name="play_button">Play</string>
     <string name="instructions_button">Instructions</string>
     <string name="high_scores_button">High scores</string>
@@ -14,4 +14,5 @@
     <string name="letter_placeholders">"? ? ? ? ? ? ?"</string>
     <string name="guesses_left">6</string>
     <string name="letters_tried">u e o f s w</string>
+
 </resources>

@@ -10,9 +10,11 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.example.bubbles.evilhangman.GameplayActivity">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <LinearLayout
+        android:id="@+id/top_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -31,7 +33,6 @@
                 android:id="@+id/guesses_left"
                 android:textSize="48sp"
                 android:text="@string/guesses_left"
-                android:layout_below="@id/back_to_menu_button"
                 android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:textAlignment="center"
@@ -44,13 +45,25 @@
             android:text="@string/letters_tried"
             android:textAlignment="center"
             android:layout_width="70dp"
-            android:layout_alignParentRight="true"
+            android:layout_marginLeft="3dp"
+            android:layout_marginStart="3dp"
         />
-    </RelativeLayout>
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/hangman"
+        android:src="@drawable/over_10_left"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_width="100dp"
+    />
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@id/top_container"
+        android:layout_toEndOf="@id/top_container"
+        android:layout_toLeftOf="@id/hangman"
+        android:layout_toStartOf="@id/hangman"
         android:orientation="vertical">
 
         <com.example.bubbles.evilhangman.Views.CrayonTextView

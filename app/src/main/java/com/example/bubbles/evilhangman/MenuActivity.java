@@ -15,6 +15,8 @@ public class MenuActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         initialise_elements();
+        // collects about 13 MB of memory
+        System.gc();
     }
 
     private void initialise_elements() {

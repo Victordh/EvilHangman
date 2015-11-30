@@ -39,7 +39,7 @@
         </LinearLayout>
         <ImageView
             android:id="@+id/hangman"
-            android:src="@drawable/hangman2"
+            android:src="@drawable/over_10_left"
             android:layout_centerHorizontal="true"
             android:layout_width="150dp"
             android:layout_height="150dp"
