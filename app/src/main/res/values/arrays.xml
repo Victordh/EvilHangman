@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="words_short">
+        <item>BEAR</item>
+        <item>BOAR</item>
+        <item>DEER</item>
+        <item>DUCK</item>
+        <item>HARE</item>
+        <item>A</item>
+        <item>AB</item>
+        <item>ABC</item>
+        <item>SEVEN</item>
+        <item>ELEVEN</item>
+        <item>ELEVENS</item>
+        <item>THIRTEEN</item>
+        <item>LARGEREST</item>
+        <item>FIREPEOPLE</item>
+        <item>HOSEBLANKET</item>
+        <item>HORSEBLANKET</item>
+        <item>HORSEBLANKETS</item>
+        <item>TWELVETHOUSAND</item>
+        <item>SIXTEENTHOUSAND</item>
+        <item>NINETEENTHOUSAND</item>
+    </string-array>
+</resources>

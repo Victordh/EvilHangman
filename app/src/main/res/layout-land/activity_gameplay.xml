@@ -41,7 +41,7 @@
         <com.example.bubbles.evilhangman.Views.CrayonTextView
             style="@style/standard_textview"
             android:id="@+id/letters_tried"
-            android:textSize="22sp"
+            android:textSize="19sp"
             android:text="@string/letters_tried"
             android:textAlignment="center"
             android:layout_width="70dp"
@@ -50,11 +50,13 @@
         />
     </LinearLayout>
     <ImageView
+        android:contentDescription="@string/hangman_contentDescription"
         android:id="@+id/hangman"
         android:src="@drawable/over_10_left"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_width="100dp"
+        android:layout_height="100dp"
     />
     <LinearLayout
         android:layout_width="fill_parent"
@@ -67,8 +69,8 @@
         android:orientation="vertical">
 
         <com.example.bubbles.evilhangman.Views.CrayonTextView
-            android:id="@+id/the_word"
-            android:text="@string/letter_placeholders"
+            android:id="@+id/questionmarks"
+            android:text="@string/questionmarks"
             android:textSize="40sp"
             android:textColor="#D6DED5"
             android:layout_width="wrap_content"

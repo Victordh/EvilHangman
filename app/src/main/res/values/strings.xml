@@ -11,8 +11,9 @@
     <string name="letter_input_hint">Enter letter here</string>
     <string name="guess_button">Guess!</string>
     <string name="new_word_button">New word</string>
-    <string name="letter_placeholders">"? ? ? ? ? ? ?"</string>
+    <string name="questionmarks">"? ? ? ? ? ? ?"</string>
     <string name="guesses_left">6</string>
-    <string name="letters_tried">u e o f s w</string>
+    <string name="letters_tried"></string>
+    <string name="hangman_contentDescription">Picture of hangman depicting amount of guesses left</string>
 
 </resources>

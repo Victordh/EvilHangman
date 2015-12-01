@@ -62,8 +62,8 @@
         android:orientation="vertical">
 
         <com.example.bubbles.evilhangman.Views.CrayonTextView
-            android:id="@+id/the_word"
-            android:text="@string/letter_placeholders"
+            android:id="@+id/questionmarks"
+            android:text="@string/questionmarks"
             android:textSize="48sp"
             android:textColor="#D6DED5"
             android:layout_width="wrap_content"
