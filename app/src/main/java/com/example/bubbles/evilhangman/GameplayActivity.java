@@ -5,24 +5,29 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.example.bubbles.evilhangman.Views.CrayonButton;
 import com.example.bubbles.evilhangman.Views.CrayonTextView;
 
 public class GameplayActivity extends Activity {
 
-    static String[] words;
-    CrayonTextView questionmarks, letters_tried;
+    CrayonTextView questionmarks, letters_tried, guesses_left;
     CrayonButton guess_button;
-    String word_picked, letter;
-    Gameplay gameplay;
+    ImageView hangman;
     EditText letter_input;
+
+    static String[] words;
+    String word;
+    Gameplay gameplay;
+    GoodGameplay goodgameplay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gameplay);
         gameplay = new Gameplay();
+        goodgameplay = new GoodGameplay();
         words = getResources().getStringArray(R.array.words_short);
 
         initialise();
@@ -34,6 +39,8 @@ public class GameplayActivity extends Activity {
         questionmarks = (CrayonTextView) findViewById(R.id.questionmarks);
         letter_input = (EditText) findViewById(R.id.letter_input);
         letters_tried = (CrayonTextView) findViewById(R.id.letters_tried);
+        guesses_left = (CrayonTextView) findViewById(R.id.guesses_left);
+        hangman = (ImageView) findViewById(R.id.hangman);
     }
 
     public void back_to_menu_button_click(View view) {
@@ -42,11 +49,42 @@ public class GameplayActivity extends Activity {
     }
 
     public void guess_button_click(View view) {
-        if (get_letter_input()){
+        String input = letter_input.getText().toString();
+        String tried = letters_tried.getText().toString();
+        // check if the input is a valid letter and not tried yet
+        String letter = gameplay.get_letter_input(input, tried);
+        if (!letter.equals("false")){
+            // add letter to letters tried
+            letters_tried.setText(tried + " " + letter);
+
             String qmarks = questionmarks.getText().toString();
+            // check if the letter is in the word
             String temp = gameplay.letter_in_word_picked(letter, qmarks);
-            questionmarks.setText(temp);
+            // if it is, change placeholders
+            if (!qmarks.equals(temp)) {
+                questionmarks.setText(temp);
+                // shows win picture if user wins
+                if (gameplay.word_revealed(temp)) {
+                    hangman.setImageResource(R.drawable.win);
+                    guess_button.setVisibility(View.INVISIBLE);
+                }
+            }
+            // if it's not, remove one guess and adjust the picture
+            else {
+                String guesses = guesses_left.getText().toString();
+                int amount = gameplay.remove_one_guess(guesses);
+                guesses_left.setText(Integer.toString(amount));
+                String image = "left_" + Integer.toString(amount);
+                int resID = getResources().getIdentifier(image, "drawable", getPackageName());
+                hangman.setImageResource(resID);
+                // shows word if user loses
+                if (guesses_left.getText().charAt(0) == '0') {
+                    guess_button.setVisibility(View.INVISIBLE);
+                    questionmarks.setText(gameplay.the_word_was());
+                }
+            }
         }
+        // clears user input from EditText
         letter_input.setText("");
     }
 
@@ -54,61 +92,49 @@ public class GameplayActivity extends Activity {
         reset();
     }
 
-    private void reset(){
-        word_picked = gameplay.random_word();
+    // picks a word and sets questionmarks accordingly
+    // resets guesses left, letters tried, picture
+    private void reset() {
+        word = goodgameplay.random_word();
         questionmarks.setText(gameplay.set_questionmarks());
         set_questionmark_size();
+
         letters_tried.setText(R.string.letters_tried);
+        guess_button.setVisibility(View.VISIBLE);
+        hangman.setImageResource(R.drawable.over_10_left);
+        guesses_left.setText(R.string.guesses_left);
     }
 
+    // adjusts the text size according to the length of the word
     private void set_questionmark_size(){
-        switch (word_picked.length()) {
+        switch (word.length()) {
             default:
                 questionmarks.setTextSize(48);
                 break;
             case 9:
-                questionmarks.setTextSize(44);
+                questionmarks.setTextSize(42);
                 break;
             case 10:
-                questionmarks.setTextSize(40);
+                questionmarks.setTextSize(38);
                 break;
             case 11:
-                questionmarks.setTextSize(36);
+                questionmarks.setTextSize(34);
                 break;
             case 12:
-                questionmarks.setTextSize(32);
-                break;
-            case 13:
                 questionmarks.setTextSize(30);
                 break;
-            case 14:
+            case 13:
                 questionmarks.setTextSize(28);
                 break;
-            case 15:
+            case 14:
                 questionmarks.setTextSize(26);
                 break;
-            case 16:
+            case 15:
                 questionmarks.setTextSize(24);
                 break;
+            case 16:
+                questionmarks.setTextSize(22);
+                break;
         }
-    }
-
-    // returns the character input if it's a letter and not tried yet
-    private boolean get_letter_input() {
-        // takes the first character of user input (disregards if no input)
-        if (letter_input.getText().toString().length() != 0) {
-            String l = letter_input.getText().toString().substring(0, 1).toLowerCase();
-            // checks if the character is a letter
-            if (l.matches("[a-z]+")) {
-                // checks with already tried letters
-                String tried = letters_tried.getText().toString();
-                if (!tried.contains(l)){
-                    letters_tried.setText(tried + " " + l);
-                    letter = l;
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 }

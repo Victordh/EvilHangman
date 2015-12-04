@@ -1,34 +1,37 @@
 package com.example.bubbles.evilhangman;
 
-import android.content.res.Resources;
-import android.view.View;
-
-import com.example.bubbles.evilhangman.GameplayActivity;
-
 import java.util.Random;
 
 public class Gameplay {
 
-    public String word_picked;
+    String word_picked;
 
-    // picks a word randomly from the dictionary
-    public String random_word(){
-        Integer random_number = new Random().nextInt(GameplayActivity.words.length);
-        String[] array = GameplayActivity.words;
-        word_picked = array[random_number];
-        String the_word_was = word_picked;
-        return word_picked;
-    }
-
-    // puts up the correct amount of questionmarks
+    // returns a string with the correct amount of questionmarks
     public String set_questionmarks(){
-        String temp = "";
-        for (Integer i = 0; i < word_picked.length(); i++) {
-            temp += "? ";
+        String temp = "?";
+        for (Integer i = 1; i < word_picked.length(); i++) {
+            temp += " ?";
         }
         return temp;
     }
 
+    // returns the character input if it's a letter and not tried yet
+    public String get_letter_input(String letter, String tried) {
+        // takes the first character of user input (disregards if no input)
+        if (letter.length() != 0) {
+            String l = letter.substring(0, 1).toUpperCase();
+            // checks if the character is a letter
+            if (l.matches("[A-Z]+")) {
+                // checks with already tried letters
+                if (!tried.contains(l)){
+                    return l;
+                }
+            }
+        }
+        return "false";
+    }
+
+    // returns the word placeholders with all non-guessed letters as ?
     public String letter_in_word_picked(String letter, String questionmarks) {
         // checks if letter is in the_word
         if (word_picked.contains(letter)) {
@@ -40,59 +43,27 @@ public class Gameplay {
                     qmarks[i * 2] = letter.toCharArray()[0];
                 }
             }
-            return qmarks.toString();
+            questionmarks = new String(qmarks);
         }
         return questionmarks;
     }
-                /*int location = picked_word.indexOf(first_letter);
-                String new_word = word.substring(0,(location * 2))+ first_letter + word.substring(location * 2 + 1);
-                the_word.setText(new_word);
 
-                // removes the letter from the computer's word
-                char[] picked_word_chars = picked_word.toCharArray();
-                picked_word_chars[location] = '?';
-                picked_word = String.valueOf(picked_word_chars);
+    // returns the current amount of guesses left minus 1
+    public int remove_one_guess(String guesses_left) {
+        return Integer.parseInt(guesses_left) - 1;
+    }
 
-                // check if the entire word has been revealed
-                if(questionmarks.matches("^[\pL\pN]+$")) {
-                    guess_button.setVisibility(View.INVISIBLE);
-            }
+    // returns if the user has revealed the entire word and thus won
+    public Boolean word_revealed(String questionmarks) {
+        return !questionmarks.contains("?");
+    }
+
+    // returns a string of the word with spaces between each letter
+    public String the_word_was() {
+        String the_word_was = String.valueOf(word_picked.charAt(0));
+        for (int i = 1; i < word_picked.length(); i++) {
+            the_word_was += " " + word_picked.charAt(i);
         }
-
-
-        // removes one guess chance if letter not in word
-        else {*/
-            // remove 1 from guesses left
-            // change picture accordingly
-
-            /*Integer amount = Integer.parseInt(guesses_left.getText().toString().substring(9, 10));
-            amount -= 1;
-            guesses_left.setText("You have " + amount + " wrong guesses left!");
-            switch (amount) {
-                case 5:
-                    hangman6.setVisibility(View.INVISIBLE);
-                    hangman5.setVisibility(View.VISIBLE);
-                    break;
-                case 4:
-                    hangman5.setVisibility(View.INVISIBLE);
-                    hangman4.setVisibility(View.VISIBLE);
-                    break;
-                case 3:
-                    hangman4.setVisibility(View.INVISIBLE);
-                    hangman3.setVisibility(View.VISIBLE);
-                    break;
-                case 2:
-                    hangman3.setVisibility(View.INVISIBLE);
-                    hangman2.setVisibility(View.VISIBLE);
-                    break;
-                case 1:
-                    hangman2.setVisibility(View.INVISIBLE);
-                    hangman1.setVisibility(View.VISIBLE);
-                    break;
-                case 0:
-                    hangman1.setVisibility(View.INVISIBLE);
-                    hangman0.setVisibility(View.VISIBLE);
-                    guess_button.setVisibility(View.INVISIBLE);
-                    break;
-            }*/
+        return the_word_was;
+    }
 }
