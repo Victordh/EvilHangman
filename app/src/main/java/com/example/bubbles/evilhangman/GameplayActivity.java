@@ -19,16 +19,14 @@ public class GameplayActivity extends Activity {
 
     static String[] words;
     String word;
-    Gameplay gameplay;
     GoodGameplay goodgameplay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gameplay);
-        gameplay = new Gameplay();
         goodgameplay = new GoodGameplay();
-        words = getResources().getStringArray(R.array.words_short);
+        words = getResources().getStringArray(R.array.words);
 
         initialise();
         reset();
@@ -52,19 +50,19 @@ public class GameplayActivity extends Activity {
         String input = letter_input.getText().toString();
         String tried = letters_tried.getText().toString();
         // check if the input is a valid letter and not tried yet
-        String letter = gameplay.get_letter_input(input, tried);
+        String letter = goodgameplay.get_letter_input(input, tried);
         if (!letter.equals("false")){
             // add letter to letters tried
             letters_tried.setText(tried + " " + letter);
 
             String qmarks = questionmarks.getText().toString();
             // check if the letter is in the word
-            String temp = gameplay.letter_in_word_picked(letter, qmarks);
+            String temp = goodgameplay.letter_in_word_picked(letter, qmarks);
             // if it is, change placeholders
             if (!qmarks.equals(temp)) {
                 questionmarks.setText(temp);
                 // shows win picture if user wins
-                if (gameplay.word_revealed(temp)) {
+                if (goodgameplay.word_revealed(temp)) {
                     hangman.setImageResource(R.drawable.win);
                     guess_button.setVisibility(View.INVISIBLE);
                 }
@@ -72,7 +70,7 @@ public class GameplayActivity extends Activity {
             // if it's not, remove one guess and adjust the picture
             else {
                 String guesses = guesses_left.getText().toString();
-                int amount = gameplay.remove_one_guess(guesses);
+                int amount = goodgameplay.remove_one_guess(guesses);
                 guesses_left.setText(Integer.toString(amount));
                 String image = "left_" + Integer.toString(amount);
                 int resID = getResources().getIdentifier(image, "drawable", getPackageName());
@@ -80,7 +78,7 @@ public class GameplayActivity extends Activity {
                 // shows word if user loses
                 if (guesses_left.getText().charAt(0) == '0') {
                     guess_button.setVisibility(View.INVISIBLE);
-                    questionmarks.setText(gameplay.the_word_was());
+                    questionmarks.setText(goodgameplay.the_word_was());
                 }
             }
         }
@@ -96,7 +94,7 @@ public class GameplayActivity extends Activity {
     // resets guesses left, letters tried, picture
     private void reset() {
         word = goodgameplay.random_word();
-        questionmarks.setText(gameplay.set_questionmarks());
+        questionmarks.setText(goodgameplay.set_questionmarks());
         set_questionmark_size();
 
         letters_tried.setText(R.string.letters_tried);

@@ -16,4 +16,11 @@
     <string name="letters_tried"></string>
     <string name="hangman_contentDescription">Picture of hangman depicting amount of guesses left</string>
 
+    <string name="settings_title">Settings</string>
+    <string name="word_length_text">Word length</string>
+    <string name="guesses_allowed_text">Guesses allowed</string>
+    <string name="evil_mode_text">Evil mode</string>
+    <string name="guesses_allowed_label">6</string>
+    <string name="word_length_label">4</string>
+
 </resources>
