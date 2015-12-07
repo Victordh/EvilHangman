@@ -12,11 +12,11 @@ DONE Navigation Menu
 DONE Configurable settings  
 
 Requirements:  
-TODO Start gameplay on lauch  
-TODO Configurable length of word (in settings)  
-TODO Evil/non-evil switch (in settings)  
-TODO Changing settings applies from next game on  
 TODO High scores / stats of at least 10 games  
+TODO Evil/non-evil switch (in settings)  
+DONE Start gameplay on first launch  
+DONE Configurable length of word (in settings)  
+DONE Changing settings applies from next game on  
 DONE Keep track (and inform user) of their progress (open letters, guessed letters, guesses left, etc.)  
 DONE User can input letters via some on-screen keyboard  
 DONE Only accept single letters as input  
@@ -26,8 +26,9 @@ DONE End gameplay when out of guesses or when word is guessed. Inform player of 
 DONE Configurable amount of guesses allowed (in settings)  
 
 Extra:  
-TODO Button to clear statistics  
-TODO Instructions  
+TODO Button to clear high scores / stats  
+DONE Instructions  
+DONE Button to reset settings  
 DONE Changing gallows-building depending on amount of guesses allowed  
 DONE Theme (chalk)  
 DONE Different layout depending on horizontal/vertical screen  
