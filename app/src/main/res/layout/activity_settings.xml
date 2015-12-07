@@ -22,7 +22,7 @@
         android:id="@+id/settings_title"
         android:text="@string/settings_title"
         android:layout_marginTop="50dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="@dimen/settings_marginBottom"
     />
 
     <RelativeLayout
@@ -33,13 +33,13 @@
     </RelativeLayout>
 
     <LinearLayout
+        android:orientation="vertical"
+        android:gravity="end"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
-        android:orientation="vertical"
         android:layout_below="@id/settings_title"
         android:layout_alignRight="@id/center_layout"
         android:layout_alignEnd="@id/center_layout"
-        android:gravity="end"
         android:layout_marginRight="10dp"
         android:layout_marginEnd="10dp">
 
@@ -48,7 +48,7 @@
             android:id="@+id/name_text"
             android:text="@string/name_text"
             android:textSize="24sp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="@dimen/settings_marginBottom"
         />
 
         <com.example.bubbles.evilhangman.Views.CrayonTextView
@@ -56,7 +56,7 @@
             android:id="@+id/word_length_text"
             android:text="@string/word_length_text"
             android:textSize="24sp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="@dimen/settings_marginBottom"
         />
 
         <com.example.bubbles.evilhangman.Views.CrayonTextView
@@ -64,7 +64,7 @@
             android:id="@+id/guesses_allowed_text"
             android:text="@string/guesses_allowed_text"
             android:textSize="24sp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="@dimen/settings_marginBottom"
         />
 
         <com.example.bubbles.evilhangman.Views.CrayonTextView
@@ -87,17 +87,17 @@
 
         <com.example.bubbles.evilhangman.Views.CrayonEditText
             android:id="@+id/name_edittext"
+            android:textSize="18sp"
+            android:textColor="#D6DED5"
             android:hint="@string/name_edittext_hint"
             android:textColorHint="#D6DED5"
             android:imeOptions="flagNoExtractUi"
-            android:background="@android:color/transparent"
             android:inputType="textNoSuggestions"
-            android:textSize="18sp"
-            android:textColor="#D6DED5"
+            android:background="@android:color/transparent"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_marginTop="3dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="@dimen/settings_marginBottom"
             android:layout_marginLeft="15dp"
             android:layout_marginStart="15dp"
         />
@@ -109,17 +109,17 @@
             android:max="15"
             android:progress="9"
             android:layout_marginTop="3dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="@dimen/settings_marginBottom"
         />
 
         <SeekBar
             android:id="@+id/guesses_allowed_seekbar"
             android:layout_width="125dp"
             android:layout_height="28dp"
-            android:max="15"
+            android:max="25"
             android:progress="6"
             android:layout_marginTop="3dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="@dimen/settings_marginBottom"
         />
 
         <Switch
@@ -146,7 +146,7 @@
             android:id="@+id/word_length_label"
             android:text="@string/word_length_label"
             android:textSize="24sp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="@dimen/settings_marginBottom"
         />
 
         <com.example.bubbles.evilhangman.Views.CrayonTextView
