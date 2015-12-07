@@ -148,11 +148,8 @@ public class SettingsActivity extends Activity {
 
     public void settings_reset_button_click(View view) {
         name_edittext.setText(R.string.name_default);
-        word_length_seekbar.setProgress(9);
-        word_length_label.setText(R.string.word_length_label);
-        guesses_allowed_seekbar.setProgress(6);
-        guesses_allowed_label.setText(R.string.guesses_allowed_label);
+        word_length_seekbar.setProgress(9 - 1);
+        guesses_allowed_seekbar.setProgress(6 - 1);
         evil_mode_switch.setChecked(true);
-        evil_mode_text.setText(R.string.evil_mode_on);
     }
 }
