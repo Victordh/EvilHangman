@@ -1,7 +1,9 @@
 package com.example.bubbles.evilhangman;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -11,6 +13,10 @@ import com.example.bubbles.evilhangman.Views.CrayonButton;
 import com.example.bubbles.evilhangman.Views.CrayonTextView;
 
 public class GameplayActivity extends Activity {
+
+    public static final String PREFERENCES_FILE_NAME = "settings";
+    public SharedPreferences settings;
+    public static Context context;
 
     CrayonTextView questionmarks, letters_tried, guesses_left;
     CrayonButton guess_button;
@@ -25,14 +31,21 @@ public class GameplayActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gameplay);
+        context = getApplicationContext();
         goodgameplay = new GoodGameplay();
         words = getResources().getStringArray(R.array.words);
+
 
         initialise();
         reset();
     }
 
+    public static Context getContext() {
+        return context;
+    }
+
     private void initialise() {
+        settings = this.getSharedPreferences(PREFERENCES_FILE_NAME, 0);
         guess_button = (CrayonButton) findViewById(R.id.guess_button);
         questionmarks = (CrayonTextView) findViewById(R.id.questionmarks);
         letter_input = (EditText) findViewById(R.id.letter_input);
@@ -62,24 +75,17 @@ public class GameplayActivity extends Activity {
             if (!qmarks.equals(temp)) {
                 questionmarks.setText(temp);
                 // shows win picture if user wins
-                if (goodgameplay.word_revealed(temp)) {
-                    hangman.setImageResource(R.drawable.win);
-                    guess_button.setVisibility(View.INVISIBLE);
-                }
+                show_picture_at_win(temp);
             }
             // if it's not, remove one guess and adjust the picture
             else {
                 String guesses = guesses_left.getText().toString();
                 int amount = goodgameplay.remove_one_guess(guesses);
+
                 guesses_left.setText(Integer.toString(amount));
-                String image = "left_" + Integer.toString(amount);
-                int resID = getResources().getIdentifier(image, "drawable", getPackageName());
-                hangman.setImageResource(resID);
+                adjust_picture(amount);
                 // shows word if user loses
-                if (guesses_left.getText().charAt(0) == '0') {
-                    guess_button.setVisibility(View.INVISIBLE);
-                    questionmarks.setText(goodgameplay.the_word_was());
-                }
+                show_word_at_loss();
             }
         }
         // clears user input from EditText
@@ -93,19 +99,22 @@ public class GameplayActivity extends Activity {
     // picks a word and sets questionmarks accordingly
     // resets guesses left, letters tried, picture
     private void reset() {
-        word = goodgameplay.random_word();
+        if(!settings.getBoolean("evil_mode_on", true)) {
+            word = goodgameplay.random_word();
+        }
         questionmarks.setText(goodgameplay.set_questionmarks());
         set_questionmark_size();
 
-        letters_tried.setText(R.string.letters_tried);
+        letters_tried.setText("");
         guess_button.setVisibility(View.VISIBLE);
         hangman.setImageResource(R.drawable.over_10_left);
-        guesses_left.setText(R.string.guesses_left);
+        String guesses_allowed = String.valueOf(settings.getInt("guesses_allowed_value", 6));
+        guesses_left.setText(guesses_allowed);
     }
 
     // adjusts the text size according to the length of the word
     private void set_questionmark_size(){
-        switch (word.length()) {
+        switch (settings.getInt("word_length_value", 9)) {
             default:
                 questionmarks.setTextSize(48);
                 break;
@@ -134,5 +143,33 @@ public class GameplayActivity extends Activity {
                 questionmarks.setTextSize(22);
                 break;
         }
+    }
+
+    private void show_picture_at_win(String temp){
+        if (goodgameplay.word_revealed(temp)) {
+            hangman.setImageResource(R.drawable.win);
+            guess_button.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    // displays the word if the user loses
+    private void show_word_at_loss() {
+        if (guesses_left.getText().charAt(0) == '0') {
+            guess_button.setVisibility(View.INVISIBLE);
+            questionmarks.setText(goodgameplay.the_word_was());
+        }
+    }
+
+    // displays the correct picture given the amount of guesses left
+    private void adjust_picture(int amount) {
+        String image;
+        if(amount > 10) {
+            image = "over_10_left";
+        }
+        else {
+            image = "left_" + Integer.toString(amount);
+        }
+        int resID = getResources().getIdentifier(image, "drawable", getPackageName());
+        hangman.setImageResource(resID);
     }
 }

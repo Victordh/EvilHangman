@@ -23,4 +23,136 @@
         android:text="@string/settings_title"
     />
 
+    <RelativeLayout
+        android:id="@+id/center_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true">
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:layout_below="@id/settings_title"
+        android:layout_alignRight="@id/center_layout"
+        android:layout_alignEnd="@id/center_layout"
+        android:gravity="end"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp">
+
+        <com.example.bubbles.evilhangman.Views.CrayonTextView
+            style="@style/standard_textview"
+            android:id="@+id/name_text"
+            android:text="@string/name_text"
+            android:textSize="24sp"
+            android:layout_marginBottom="10dp"
+        />
+
+        <com.example.bubbles.evilhangman.Views.CrayonTextView
+            style="@style/standard_textview"
+            android:id="@+id/word_length_text"
+            android:text="@string/word_length_text"
+            android:textSize="24sp"
+            android:layout_marginBottom="10dp"
+        />
+
+        <com.example.bubbles.evilhangman.Views.CrayonTextView
+            style="@style/standard_textview"
+            android:id="@+id/guesses_allowed_text"
+            android:text="@string/guesses_allowed_text"
+            android:textSize="24sp"
+            android:layout_marginBottom="10dp"
+        />
+
+        <com.example.bubbles.evilhangman.Views.CrayonTextView
+            style="@style/standard_textview"
+            android:id="@+id/evil_mode_text"
+            android:text="@string/evil_mode_on"
+            android:textSize="24sp"
+        />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/seekbar_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/settings_title"
+        android:layout_alignLeft="@id/center_layout"
+        android:layout_alignStart="@id/center_layout">
+
+        <com.example.bubbles.evilhangman.Views.CrayonEditText
+            android:id="@+id/name_edittext"
+            android:hint="@string/name_edittext_hint"
+            android:textColorHint="#D6DED5"
+            android:imeOptions="flagNoExtractUi"
+            android:background="@android:color/transparent"
+            android:inputType="textNoSuggestions"
+            android:textSize="18sp"
+            android:textColor="#D6DED5"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
+        />
+
+        <SeekBar
+            android:id="@+id/word_length_seekbar"
+            android:layout_width="125dp"
+            android:layout_height="28dp"
+            android:max="15"
+            android:progress="9"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="10dp"
+        />
+
+        <SeekBar
+            android:id="@+id/guesses_allowed_seekbar"
+            android:layout_width="125dp"
+            android:layout_height="28dp"
+            android:max="15"
+            android:progress="6"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="10dp"
+        />
+
+        <Switch
+            android:id="@+id/evil_mode_switch"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:switchMinWidth="75dp"
+        />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/settings_title"
+        android:layout_marginTop="36dp"
+        android:layout_toRightOf="@id/seekbar_container"
+        android:layout_toEndOf="@id/seekbar_container">
+
+        <com.example.bubbles.evilhangman.Views.CrayonTextView
+            style="@style/standard_textview"
+            android:id="@+id/word_length_label"
+            android:text="@string/word_length_label"
+            android:textSize="24sp"
+            android:layout_marginBottom="10dp"
+        />
+
+        <com.example.bubbles.evilhangman.Views.CrayonTextView
+            style="@style/standard_textview"
+            android:id="@+id/guesses_allowed_label"
+            android:text="@string/guesses_allowed_label"
+            android:textSize="24sp"
+        />
+
+    </LinearLayout>
 </RelativeLayout>

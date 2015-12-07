@@ -1,13 +1,20 @@
 package com.example.bubbles.evilhangman;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 public abstract class Gameplay {
+
+    Context context = GameplayActivity.getContext();
+    public static final String PREFERENCES_FILE_NAME = "settings";
+    SharedPreferences settings = context.getSharedPreferences(PREFERENCES_FILE_NAME, 0);
 
     String word_picked;
 
     // returns a string with the correct amount of questionmarks
     public String set_questionmarks(){
         String temp = "?";
-        for (Integer i = 1; i < word_picked.length(); i++) {
+        for (Integer i = 1; i < settings.getInt("word_length_value", 9); i++) {
             temp += " ?";
         }
         return temp;

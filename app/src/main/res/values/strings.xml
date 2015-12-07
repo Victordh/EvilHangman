@@ -1,7 +1,8 @@
 <resources>
     <!--MenuActivity-->
     <string name="app_name">Evil Hangman</string>
-    <string name="menu_evil_title"><font color="RED">Evil </font>Hangman</string>
+    <string name="evil_menu_title"><font color="RED">Evil </font>Hangman</string>
+    <string name="menu_title">Hangman</string>
     <string name="play_button">Play</string>
     <string name="instructions_button">Instructions</string>
     <string name="high_scores_button">High scores</string>
@@ -13,14 +14,17 @@
     <string name="new_word_button">New word</string>
     <string name="questionmarks">"? ? ? ? ? ? ?"</string>
     <string name="guesses_left">6</string>
-    <string name="letters_tried"></string>
     <string name="hangman_contentDescription">Picture of hangman depicting amount of guesses left</string>
 
     <string name="settings_title">Settings</string>
+    <string name="name_text">Name:</string>
     <string name="word_length_text">Word length</string>
     <string name="guesses_allowed_text">Guesses allowed</string>
-    <string name="evil_mode_text">Evil mode</string>
+    <string name="evil_mode_on">Evil mode <font color="RED">on</font></string>
+    <string name="evil_mode_off">Evil mode off</string>
+    <string name="name_edittext_hint">enter name here</string>
     <string name="guesses_allowed_label">6</string>
-    <string name="word_length_label">4</string>
+    <string name="word_length_label">9</string>
+
 
 </resources>

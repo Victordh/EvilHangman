@@ -1,13 +1,22 @@
 package com.example.bubbles.evilhangman;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import java.util.Random;
 
 public class GoodGameplay extends Gameplay{
 
+    Context context = GameplayActivity.getContext();
+    public static final String PREFERENCES_FILE_NAME = "settings";
+    SharedPreferences settings = context.getSharedPreferences(PREFERENCES_FILE_NAME, 0);
+
     // returns a randomly picked word from the dictionary
     public String random_word(){
-        Integer n = new Random().nextInt(GameplayActivity.words.length);
-        word_picked = GameplayActivity.words[n];
+        do {
+            Integer n = new Random().nextInt(GameplayActivity.words.length);
+            word_picked = GameplayActivity.words[n];
+        } while(word_picked.length() != settings.getInt("word_length_value", 9));
         return word_picked;
     }
 
