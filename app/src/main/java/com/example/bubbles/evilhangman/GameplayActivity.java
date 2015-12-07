@@ -17,15 +17,12 @@ public class GameplayActivity extends Activity {
     public static final String PREFERENCES_FILE_NAME = "settings";
     public SharedPreferences settings;
     public static Context context;
+    GoodGameplay goodgameplay;
 
     CrayonTextView questionmarks, letters_tried, guesses_left;
     CrayonButton guess_button;
     ImageView hangman;
     EditText letter_input;
-
-    static String[] words;
-    String word;
-    GoodGameplay goodgameplay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +30,9 @@ public class GameplayActivity extends Activity {
         setContentView(R.layout.activity_gameplay);
         context = getApplicationContext();
         goodgameplay = new GoodGameplay();
-        words = getResources().getStringArray(R.array.words);
-
 
         initialise();
+        goodgameplay.load_words();
         reset();
     }
 
@@ -100,7 +96,7 @@ public class GameplayActivity extends Activity {
     // resets guesses left, letters tried, picture
     private void reset() {
         if(!settings.getBoolean("evil_mode_on", true)) {
-            word = goodgameplay.random_word();
+            goodgameplay.random_word();
         }
         questionmarks.setText(goodgameplay.set_questionmarks());
         set_questionmark_size();

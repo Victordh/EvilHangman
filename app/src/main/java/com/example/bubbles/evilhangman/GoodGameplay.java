@@ -14,8 +14,8 @@ public class GoodGameplay extends Gameplay{
     // returns a randomly picked word from the dictionary
     public String random_word(){
         do {
-            Integer n = new Random().nextInt(GameplayActivity.words.length);
-            word_picked = GameplayActivity.words[n];
+            Integer n = new Random().nextInt(words.length);
+            word_picked = words[n];
         } while(word_picked.length() != settings.getInt("word_length_value", 9));
         return word_picked;
     }

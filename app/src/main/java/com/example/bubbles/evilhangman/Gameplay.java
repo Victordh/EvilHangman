@@ -10,6 +10,12 @@ public abstract class Gameplay {
     SharedPreferences settings = context.getSharedPreferences(PREFERENCES_FILE_NAME, 0);
 
     String word_picked;
+    String[] words;
+
+    // loads the words into a string array
+    public void load_words(){
+        words = context.getResources().getStringArray(R.array.words);
+    }
 
     // returns a string with the correct amount of questionmarks
     public String set_questionmarks(){
