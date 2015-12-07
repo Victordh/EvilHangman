@@ -12,7 +12,7 @@
     <string name="letter_input_hint">Enter letter here</string>
     <string name="guess_button">Guess!</string>
     <string name="new_word_button">New word</string>
-    <string name="questionmarks">"? ? ? ? ? ? ?"</string>
+    <string name="questionmarks">"? ? ? ? ? ? ? ? ?"</string>
     <string name="guesses_left">6</string>
     <string name="hangman_contentDescription">Picture of hangman depicting amount of guesses left</string>
 
@@ -23,8 +23,17 @@
     <string name="evil_mode_on">Evil mode <font color="RED">on</font></string>
     <string name="evil_mode_off">Evil mode off</string>
     <string name="name_edittext_hint">enter name here</string>
-    <string name="guesses_allowed_label">6</string>
     <string name="word_length_label">9</string>
+    <string name="guesses_allowed_label">6</string>
 
+    <string name="high_scores_title">High Scores</string>
 
+    <string name="instructions_title">Instructions</string>
+    <string name="instructions_start">Welcome to Hangman!</string>
+    <string name="evil_instructions_start">Welcome to Evil Hangman!</string>
+    <string name="instructions_middle">The goal of this game is to guess the word before you run out of guesses and you\'re left hanging on the gallows. You can guess if a certain letter is in the word. If your guess is correct, the computer will reveal all occurrences of that letter. If it isn\'t, you\'ll lose a guess and be one step closer to meeting your grim fate. All letters you already tried will be shown as a reminder.</string>
+    <string name="instructions_end">In the normal version, the computer will pick a word at the start and stick with it. Be sure to check out the evil mode as well!</string>
+    <string name="evil_instructions_end">In the evil version, the computer will actively try to kill you by changing it\'s mind: the word may change to make sure you\'re guessing wrong letters a lot more!</string>
+    <string name="settings_reset_button">Reset</string>
+    <string name="name_default">Player001</string>
 </resources>

@@ -51,7 +51,7 @@ public class SettingsActivity extends Activity {
     }
 
     private void get_values_from_prefs() {
-        String name = settings.getString("name", "Player001");
+        String name = settings.getString("name", getString(R.string.name_default));
         name_edittext.setText(name);
 
         int word_length_value = settings.getInt("word_length_value", 9);
@@ -144,5 +144,15 @@ public class SettingsActivity extends Activity {
     public void back_to_menu_button_click(View view) {
         Intent intent = new Intent(SettingsActivity.this, MenuActivity.class);
         startActivity(intent);
+    }
+
+    public void settings_reset_button_click(View view) {
+        name_edittext.setText(R.string.name_default);
+        word_length_seekbar.setProgress(9);
+        word_length_label.setText(R.string.word_length_label);
+        guesses_allowed_seekbar.setProgress(6);
+        guesses_allowed_label.setText(R.string.guesses_allowed_label);
+        evil_mode_switch.setChecked(true);
+        evil_mode_text.setText(R.string.evil_mode_on);
     }
 }

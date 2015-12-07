@@ -17,6 +17,17 @@
         android:onClick="back_to_menu_button_click"
     />
 
+    <com.example.bubbles.evilhangman.Views.CrayonButton
+        style="@style/back_button"
+        android:id="@+id/setting_reset_button"
+        android:text="@string/settings_reset_button"
+        android:onClick="settings_reset_button_click"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentLeft="false"
+    />
+
     <com.example.bubbles.evilhangman.Views.CrayonTextView
         style="@style/title"
         android:id="@+id/settings_title"

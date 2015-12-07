@@ -3,4 +3,6 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="settings_marginBottom">10dp</dimen>
+    <dimen name="instructions_land_image_size">43dp</dimen>
+    <dimen name="instructions_portrait_image_size">25dp</dimen>
 </resources>

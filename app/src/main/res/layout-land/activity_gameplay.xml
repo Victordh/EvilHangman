@@ -51,7 +51,7 @@
     <ImageView
         android:contentDescription="@string/hangman_contentDescription"
         android:id="@+id/hangman"
-        android:src="@drawable/over_10_left"
+        android:src="@drawable/left_6"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_width="100dp"
@@ -70,7 +70,7 @@
         <com.example.bubbles.evilhangman.Views.CrayonTextView
             android:id="@+id/questionmarks"
             android:text="@string/questionmarks"
-            android:textSize="40sp"
+            android:textSize="42sp"
             android:textColor="#D6DED5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

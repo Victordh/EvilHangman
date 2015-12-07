@@ -18,9 +18,15 @@ public abstract class Gameplay {
     }
 
     // returns a string with the correct amount of questionmarks
-    public String set_questionmarks(){
+    public String set_questionmarks(Boolean new_game){
         String temp = "?";
-        for (Integer i = 1; i < settings.getInt("word_length_value", 9); i++) {
+        int length;
+        if (new_game) {
+            length = settings.getInt("word_length_value", 9);
+        } else {
+            length = word_picked.length();
+        }
+        for (Integer i = 1; i < length; i++) {
             temp += " ?";
         }
         return temp;

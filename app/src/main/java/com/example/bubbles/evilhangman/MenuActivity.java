@@ -19,21 +19,22 @@ public class MenuActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         initialise();
+        set_title();
+        first_time();
+    }
 
+    private void initialise() {
+        settings = this.getSharedPreferences(PREFERENCES_FILE_NAME, 0);
+        menu_title = (CrayonTextView) findViewById(R.id.menu_title);
+    }
+
+    private void set_title(){
         if(settings.getBoolean("evil_mode_on", true)) {
             menu_title.setText(R.string.evil_menu_title);
         }
         else {
             menu_title.setText(R.string.menu_title);
         }
-
-        // collects about 13 MB of memory
-        System.gc();
-    }
-
-    private void initialise() {
-        settings = this.getSharedPreferences(PREFERENCES_FILE_NAME, 0);
-        menu_title = (CrayonTextView) findViewById(R.id.menu_title);
     }
 
     public void play_button_click(View view) {
@@ -54,5 +55,13 @@ public class MenuActivity extends Activity {
     public void settings_button_click(View view) {
         Intent intent = new Intent(MenuActivity.this, SettingsActivity.class);
         startActivity(intent);
+    }
+
+    // starts gameplay immediately on first launch
+    private void first_time() {
+        if (!settings.getBoolean("first_time", false)) {
+            Intent intent = new Intent(MenuActivity.this, GameplayActivity.class);
+            startActivity(intent);
+        }
     }
 }
