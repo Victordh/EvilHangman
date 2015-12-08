@@ -12,7 +12,7 @@ DONE Navigation Menu
 DONE Configurable settings  
 
 Requirements:  
-TODO Evil/non-evil mode
+TODO Evil/non-evil mode  
 DONE Evil/non-evil switch (in settings)  
 DONE High scores / stats of at least 10 games  
 DONE Start gameplay on first launch  
