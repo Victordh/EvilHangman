@@ -36,4 +36,10 @@
     <string name="evil_instructions_end">In the evil version, the computer will actively try to kill you by changing it\'s mind: the word may change to make sure you\'re guessing wrong letters a lot more!</string>
     <string name="settings_reset_button">Reset</string>
     <string name="name_default">Player001</string>
+    <string name="table_name">Name</string>
+    <string name="table_evil_mode">Evil mode</string>
+    <string name="table_length">Length</string>
+    <string name="table_guesses">Guesses</string>
+    <string name="table_word">Word</string>
+    <string name="clear_high_scores_button">Clear</string>
 </resources>

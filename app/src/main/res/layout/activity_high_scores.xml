@@ -17,4 +17,73 @@
         android:onClick="back_to_menu_button_click"
     />
 
+    <com.example.bubbles.evilhangman.Views.CrayonButton
+        style="@style/back_button"
+        android:id="@+id/clear_high_scores_button"
+        android:text="@string/clear_high_scores_button"
+        android:onClick="clear_high_scores_button_click"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentLeft="false"
+    />
+
+    <com.example.bubbles.evilhangman.Views.CrayonTextView
+        style="@style/title"
+        android:id="@+id/high_scores_title"
+        android:text="@string/high_scores_title"
+        android:layout_marginTop="50dp"
+    />
+
+    <ScrollView
+        android:layout_below="@id/high_scores_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+
+        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/high_scores_table"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableRow
+                android:id="@+id/table_row"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp">
+
+                <com.example.bubbles.evilhangman.Views.CrayonTextView
+                    style="@style/standard_textview"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    android:text="@string/table_name"
+                />
+                <com.example.bubbles.evilhangman.Views.CrayonTextView
+                    style="@style/standard_textview"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    android:text="@string/table_evil_mode"
+                />
+                <com.example.bubbles.evilhangman.Views.CrayonTextView
+                    style="@style/standard_textview"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    android:text="@string/table_length"
+                />
+                <com.example.bubbles.evilhangman.Views.CrayonTextView
+                    style="@style/standard_textview"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    android:text="@string/table_guesses"
+                />
+                <com.example.bubbles.evilhangman.Views.CrayonTextView
+                    style="@style/standard_textview"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    android:text="@string/table_word"
+                />
+            </TableRow>
+        </TableLayout>
+    </ScrollView>
 </RelativeLayout>

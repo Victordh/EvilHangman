@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/table_row"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp">
+
+    <com.example.bubbles.evilhangman.Views.CrayonTextView
+        style="@style/standard_textview"
+        android:id="@+id/table_row_view_0"
+        android:maxWidth="70dp"
+        android:textSize="18sp"
+        android:layout_weight="1"
+    />
+    <com.example.bubbles.evilhangman.Views.CrayonTextView
+        style="@style/standard_textview"
+        android:id="@+id/table_row_view_1"
+        android:textSize="18sp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+    />
+    <com.example.bubbles.evilhangman.Views.CrayonTextView
+        style="@style/standard_textview"
+        android:id="@+id/table_row_view_2"
+        android:textSize="18sp"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+    />
+    <com.example.bubbles.evilhangman.Views.CrayonTextView
+        style="@style/standard_textview"
+        android:id="@+id/table_row_view_3"
+        android:textSize="18sp"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+    />
+    <com.example.bubbles.evilhangman.Views.CrayonTextView
+        style="@style/standard_textview"
+        android:id="@+id/table_row_view_5"
+        android:maxWidth="70dp"
+        android:textSize="18sp"
+        android:layout_weight="1"
+    />
+</TableRow>

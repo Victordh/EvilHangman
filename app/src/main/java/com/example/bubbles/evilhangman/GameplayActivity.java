@@ -73,7 +73,7 @@ public class GameplayActivity extends Activity {
             if (!qmarks.equals(temp)) {
                 questionmarks.setText(temp);
                 // shows win picture if user wins
-                show_picture_at_win(temp);
+                show_picture_at_win(temp, true);
             }
             // if it's not, remove one guess and adjust the picture
             else {
@@ -83,7 +83,7 @@ public class GameplayActivity extends Activity {
                 guesses_left.setText(Integer.toString(amount));
                 adjust_picture(amount);
                 // shows word if user loses
-                show_word_at_loss();
+                show_word_at_loss(true);
             }
         }
         // clears user input from EditText
@@ -149,21 +149,27 @@ public class GameplayActivity extends Activity {
     }
 
     // displays win picture if user wins
-    private void show_picture_at_win(String temp){
+    private void show_picture_at_win(String temp, boolean high_score){
         if (goodgameplay.word_revealed(temp)) {
             hangman.setImageResource(R.drawable.win);
             guess_button.setVisibility(View.INVISIBLE);
             letter_input.setVisibility(View.INVISIBLE);
+            if (high_score) {
+                send_high_score();
+            }
         }
     }
 
     // displays the word if the user loses
-    private void show_word_at_loss() {
+    private void show_word_at_loss(boolean high_score) {
         if (guesses_left.getText().charAt(0) == '0') {
             questionmarks.setText(goodgameplay.the_word_was());
             hangman.setImageResource(R.drawable.left_0);
             guess_button.setVisibility(View.INVISIBLE);
             letter_input.setVisibility(View.INVISIBLE);
+            if (high_score) {
+                send_high_score();
+            }
         }
     }
 
@@ -212,8 +218,41 @@ public class GameplayActivity extends Activity {
 
         String word = settings.getString("game_word_progress", goodgameplay.set_questionmarks(false));
         questionmarks.setText(word);
-        show_picture_at_win(word);
-        show_word_at_loss();
+        show_picture_at_win(word, false);
+        show_word_at_loss(false);
+    }
+
+    // add game data to preferences so HighScoresActivity can show it
+    private void send_high_score() {
+        // put data in string set
+        StringBuilder sb = new StringBuilder();
+        sb.append(settings.getString("game_name", "Player001")).append(",");
+        String on_off;
+        if(settings.getBoolean("game_evil_mode_on", true)) {
+            on_off = "On";
+        }
+        else {
+            on_off = "Off";
+        }
+        sb.append(on_off).append(",");
+        sb.append(String.valueOf(settings.getInt("game_word_length", 9))).append(",");
+        String guesses = String.valueOf(settings.getString("game_guesses_left", "1") + "/" + settings.getInt("game_guesses_allowed", 11));
+        sb.append(guesses).append(",");
+        sb.append(settings.getString("game_word_picked", ""));
+
+        editor = settings.edit();
+        editor.putString(score_key(), sb.toString());
+        editor.apply();
+    }
+
+    // generate new key on the first spot where there is no string set yet
+    private String score_key() {
+        for (int i = 0; i < 9999; i++) {
+            if (settings.getString(Integer.toString(i), null) == null) {
+                return Integer.toString(i);
+            }
+        }
+        return "";
     }
 
     // starts gameplay immediately on first launch
@@ -222,7 +261,7 @@ public class GameplayActivity extends Activity {
             reset();
             editor = settings.edit();
             editor.putBoolean("first_time", true);
-            editor.commit();
+            editor.apply();
         }
     }
 }

@@ -5,15 +5,16 @@ Evil Hangman game - This app tries to prevent the user from guessing the word
 within the amount of guesses allowed.
 
 Features:  
-TODO Progress history  
+DONE Progress history  
 DONE Progress tracker  
 DONE Letter input  
 DONE Navigation Menu  
 DONE Configurable settings  
 
 Requirements:  
-TODO High scores / stats of at least 10 games  
-TODO Evil/non-evil switch (in settings)  
+TODO Evil/non-evil mode
+DONE Evil/non-evil switch (in settings)  
+DONE High scores / stats of at least 10 games  
 DONE Start gameplay on first launch  
 DONE Configurable length of word (in settings)  
 DONE Changing settings applies from next game on  
@@ -26,7 +27,8 @@ DONE End gameplay when out of guesses or when word is guessed. Inform player of 
 DONE Configurable amount of guesses allowed (in settings)  
 
 Extra:  
-TODO Button to clear high scores / stats  
+DONE Button to clear high scores / stats  
+DONE Player names
 DONE Instructions  
 DONE Button to reset settings  
 DONE Changing gallows-building depending on amount of guesses allowed  
