@@ -5,6 +5,13 @@ Evil Hangman game - A hangman app with two modes: normal and evil. In normal,
 you try to guess the word the computer has in mind. In evil, the computer
 will try to prevent you from doing so by changing their word.
 
+Note for instructor:  
+I have spent a lot of time on design and some extra features. At first because
+I thought it was a substantial part of the assignment, later because I had to
+use all kinds of functionality and tricks to get what I want, which was fun
+and interesting. Mostly because of that, I've spent less time on cleaning up my
+code than I wanted.
+
 Features:  
 DONE Progress history  
 DONE Progress tracker  
