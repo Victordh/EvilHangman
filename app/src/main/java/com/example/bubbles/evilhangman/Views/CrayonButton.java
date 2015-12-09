@@ -26,7 +26,8 @@ public class CrayonButton extends Button {
 
     private void init() {
         if (!isInEditMode()) {
-            Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "dk_crayon_crumble.ttf");
+            Typeface tf = Typeface.createFromAsset(getContext().getAssets(),
+                    "dk_crayon_crumble.ttf");
             setTypeface(tf);
         }
     }

@@ -35,18 +35,22 @@ public class SettingsActivity extends Activity {
 
         name_edittext.addTextChangedListener(name_listener());
         word_length_seekbar.setOnSeekBarChangeListener(word_length_listener);
-        guesses_allowed_seekbar.setOnSeekBarChangeListener(guesses_allowed_listener);
+        guesses_allowed_seekbar.setOnSeekBarChangeListener(
+                guesses_allowed_listener);
         evil_mode_switch.setOnCheckedChangeListener(evil_mode_listener);
     }
 
     private void initialise() {
         settings = this.getSharedPreferences(PREFERENCES_FILE_NAME, 0);
-        word_length_label = (CrayonTextView) findViewById(R.id.word_length_label);
-        guesses_allowed_label = (CrayonTextView) findViewById(R.id.guesses_allowed_label);
+        word_length_label = (CrayonTextView)
+                findViewById(R.id.word_length_label);
+        guesses_allowed_label = (CrayonTextView)
+                findViewById(R.id.guesses_allowed_label);
         evil_mode_text = (CrayonTextView) findViewById(R.id.evil_mode_text);
         name_edittext = (CrayonEditText) findViewById(R.id.name_edittext);
         word_length_seekbar = (SeekBar) findViewById(R.id.word_length_seekbar);
-        guesses_allowed_seekbar = (SeekBar) findViewById(R.id.guesses_allowed_seekbar);
+        guesses_allowed_seekbar = (SeekBar)
+                findViewById(R.id.guesses_allowed_seekbar);
         evil_mode_switch = (Switch) findViewById(R.id.evil_mode_switch);
     }
 
@@ -58,7 +62,7 @@ public class SettingsActivity extends Activity {
         word_length_seekbar.setProgress(word_length_value);
         word_length_label.setText(String.valueOf(word_length_value));
 
-        int guesses_allowed_value = settings.getInt("guesses_allowed_value", 6);
+        int guesses_allowed_value = settings.getInt("guesses_allowed_value",6);
         guesses_allowed_seekbar.setProgress(guesses_allowed_value);
         guesses_allowed_label.setText(String.valueOf(guesses_allowed_value));
 
@@ -76,11 +80,13 @@ public class SettingsActivity extends Activity {
 
         return new TextWatcher() {
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
             }
 
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
             }
 
             @Override
@@ -92,10 +98,12 @@ public class SettingsActivity extends Activity {
         };
     }
 
-    private SeekBar.OnSeekBarChangeListener word_length_listener = new SeekBar.OnSeekBarChangeListener() {
+    private SeekBar.OnSeekBarChangeListener word_length_listener =
+            new SeekBar.OnSeekBarChangeListener() {
         int value;
         @Override
-        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+        public void onProgressChanged(SeekBar seekBar, int progress,
+                                      boolean fromUser) {
             word_length_label.setText(String.valueOf(progress + 1));
             value = progress + 1;
         }
@@ -109,10 +117,12 @@ public class SettingsActivity extends Activity {
         }
     };
 
-    private SeekBar.OnSeekBarChangeListener guesses_allowed_listener = new SeekBar.OnSeekBarChangeListener() {
+    private SeekBar.OnSeekBarChangeListener guesses_allowed_listener =
+            new SeekBar.OnSeekBarChangeListener() {
         int value;
         @Override
-        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+        public void onProgressChanged(SeekBar seekBar, int progress,
+                                      boolean fromUser) {
             guesses_allowed_label.setText(String.valueOf(progress + 1));
             value = progress + 1;
         }
@@ -126,9 +136,11 @@ public class SettingsActivity extends Activity {
         }
     };
 
-    private Switch.OnCheckedChangeListener evil_mode_listener = new Switch.OnCheckedChangeListener() {
+    private Switch.OnCheckedChangeListener evil_mode_listener =
+            new Switch.OnCheckedChangeListener() {
         @Override
-        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked){
+        public void onCheckedChanged(CompoundButton buttonView,
+                                     boolean isChecked){
             if(isChecked){
                 evil_mode_text.setText(R.string.evil_mode_on);
             }

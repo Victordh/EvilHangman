@@ -1,8 +1,9 @@
 # EvilHangman
 Victor den Haan - 10118039  
 Final App for Virtual App Studio  
-Evil Hangman game - This app tries to prevent the user from guessing the word
-within the amount of guesses allowed.
+Evil Hangman game - A hangman app with two modes: normal and evil. In normal,
+you try to guess the word the computer has in mind. In evil, the computer
+will try to prevent you from doing so by changing their word.
 
 Features:  
 DONE Progress history  
@@ -12,18 +13,21 @@ DONE Navigation Menu
 DONE Configurable settings  
 
 Requirements:  
-TODO Evil/non-evil mode  
+DONE Evil/non-evil mode  
 DONE Evil/non-evil switch (in settings)  
 DONE High scores / stats of at least 10 games  
 DONE Start gameplay on first launch  
 DONE Configurable length of word (in settings)  
 DONE Changing settings applies from next game on  
-DONE Keep track (and inform user) of their progress (open letters, guessed letters, guesses left, etc.)  
+DONE Keep track (and inform user) of their progress (open letters, 
+guessed letters, guesses left, etc.)  
 DONE User can input letters via some on-screen keyboard  
 DONE Only accept single letters as input  
 DONE Ignore (and don't penalise) invalid input  
-DONE App's front side consists of at least title, settings navigation and new game navigation  
-DONE End gameplay when out of guesses or when word is guessed. Inform player of win/loss  
+DONE App's front side consists of at least title, settings navigation and new
+ game navigation  
+DONE End gameplay when out of guesses or when word is guessed. Inform player of
+ win/loss  
 DONE Configurable amount of guesses allowed (in settings)  
 
 Extra:  

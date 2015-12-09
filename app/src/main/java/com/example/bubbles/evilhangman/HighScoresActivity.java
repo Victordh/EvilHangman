@@ -43,12 +43,15 @@ public class HighScoresActivity extends Activity {
     private void load_high_scores() {
         for(int i = 0; i < 9999; i++) {
             if (settings.getString(Integer.toString(i), null) != null) {
-                String[] load = settings.getString(Integer.toString(i), null).split(",");
-                TableRow inflate = (TableRow) View.inflate(this, R.layout.table_row, null);
+                String[] load = settings.getString(Integer.toString(i),
+                        null).split(",");
+                TableRow inflate = (TableRow) View.inflate(this,
+                        R.layout.table_row, null);
                 inflate.setTag(i);
 
                 for(int j = 0; j < 5; j++) {
-                    CrayonTextView view = (CrayonTextView) inflate.getChildAt(j);
+                    CrayonTextView view = (CrayonTextView)
+                            inflate.getChildAt(j);
                     view.setText(load[j]);
                 }
                 high_scores_table.addView(inflate);
@@ -60,7 +63,8 @@ public class HighScoresActivity extends Activity {
     }
 
     public void back_to_menu_button_click(View view) {
-        Intent intent = new Intent(HighScoresActivity.this, MenuActivity.class);
+        Intent intent = new Intent(HighScoresActivity.this,
+                MenuActivity.class);
         startActivity(intent);
     }
 

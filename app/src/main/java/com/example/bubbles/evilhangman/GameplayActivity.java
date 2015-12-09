@@ -18,22 +18,33 @@ public class GameplayActivity extends Activity {
     public SharedPreferences settings;
     SharedPreferences.Editor editor;
     public static Context context;
-    GoodGameplay goodgameplay;
 
     CrayonTextView questionmarks, letters_tried, guesses_left;
     CrayonButton guess_button;
     ImageView hangman;
     EditText letter_input;
+    boolean evil;
+
+    EvilGameplay evilgameplay;
+    GoodGameplay goodgameplay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gameplay);
         context = getApplicationContext();
-        goodgameplay = new GoodGameplay();
 
         initialise();
-        goodgameplay.load_words();
+        evil = settings.getBoolean("evil_mode_on", true);
+        if (evil) {
+            evilgameplay = new EvilGameplay();
+            evilgameplay.load_words();
+            evilgameplay.get_words_with_length();
+        }
+        else {
+            goodgameplay = new GoodGameplay();
+            goodgameplay.load_words();
+        }
         first_time();
         get_gamestate_preferences();
     }
@@ -61,24 +72,32 @@ public class GameplayActivity extends Activity {
         String input = letter_input.getText().toString();
         String tried = letters_tried.getText().toString();
         // check if the input is a valid letter and not tried yet
-        String letter = goodgameplay.get_letter_input(input, tried);
+        String letter;
+        letter = evil ? evilgameplay.get_letter_input(input, tried) :
+                goodgameplay.get_letter_input(input, tried);
         if (!letter.equals("false")){
             // add letter to letters tried
             letters_tried.setText(tried + " " + letter);
 
             String qmarks = questionmarks.getText().toString();
             // check if the letter is in the word
-            String temp = goodgameplay.letter_in_word_picked(letter, qmarks);
-            // if it is, change placeholders
+            String temp;
+            temp = evil ? evilgameplay.handle_letter(letter, qmarks) :
+                    goodgameplay.handle_letter(letter, qmarks);
+
+            // if letter is in word, change placeholders
             if (!qmarks.equals(temp)) {
                 questionmarks.setText(temp);
                 // shows win picture if user wins
                 show_picture_at_win(temp, true);
             }
-            // if it's not, remove one guess and adjust the picture
-            else {
+
+            // if letter isn't in word, remove one guess and adjust the picture
+            if (qmarks.equals(temp)) {
                 String guesses = guesses_left.getText().toString();
-                int amount = goodgameplay.remove_one_guess(guesses);
+                int amount;
+                amount = evil ? evilgameplay.remove_one_guess(guesses) :
+                        goodgameplay.remove_one_guess(guesses);
 
                 guesses_left.setText(Integer.toString(amount));
                 adjust_picture(amount);
@@ -89,7 +108,6 @@ public class GameplayActivity extends Activity {
         // clears user input from EditText
         letter_input.setText("");
         set_gamestate_preferences();
-
     }
 
     public void new_word_button_click(View view) {
@@ -100,10 +118,18 @@ public class GameplayActivity extends Activity {
     // resets guesses left, letters tried, picture
     private void reset() {
         start_game_preferences();
-        if(!settings.getBoolean("evil_mode_on", true)) {
+        if(!evil) {
+            goodgameplay = new GoodGameplay();
+            goodgameplay.load_words();
             goodgameplay.random_word();
+            questionmarks.setText(goodgameplay.set_questionmarks(true));
         }
-        questionmarks.setText(goodgameplay.set_questionmarks(true));
+        else {
+            evilgameplay = new EvilGameplay();
+            evilgameplay.load_words();
+            questionmarks.setText(evilgameplay.set_questionmarks(true));
+            evilgameplay.get_words_with_length();
+        }
         set_questionmark_size(settings.getInt("word_length_value", 9));
 
         letters_tried.setText("");
@@ -119,7 +145,7 @@ public class GameplayActivity extends Activity {
     private void set_questionmark_size(int length){
         switch (length) {
             default:
-                questionmarks.setTextSize(48);
+                questionmarks.setTextSize(46);
                 break;
             case 9:
                 questionmarks.setTextSize(42);
@@ -150,10 +176,17 @@ public class GameplayActivity extends Activity {
 
     // displays win picture if user wins
     private void show_picture_at_win(String temp, boolean high_score){
-        if (goodgameplay.word_revealed(temp)) {
+        boolean revealed;
+        revealed = evil ? evilgameplay.word_revealed(temp) :
+                goodgameplay.word_revealed(temp);
+        if (revealed) {
             hangman.setImageResource(R.drawable.win);
             guess_button.setVisibility(View.INVISIBLE);
             letter_input.setVisibility(View.INVISIBLE);
+            if (evil && high_score) {
+                editor.putString("game_word_picked",
+                        evilgameplay.get_win_word(temp));
+            }
             if (high_score) {
                 send_high_score();
             }
@@ -163,10 +196,20 @@ public class GameplayActivity extends Activity {
     // displays the word if the user loses
     private void show_word_at_loss(boolean high_score) {
         if (guesses_left.getText().charAt(0) == '0') {
-            questionmarks.setText(goodgameplay.the_word_was());
+            if (evil) {
+                questionmarks.setText(evilgameplay.the_word_was());
+                evilgameplay.word_picked =
+                        evilgameplay.get_win_word(evilgameplay.the_word_was());
+            }
+            else {
+                questionmarks.setText(goodgameplay.the_word_was());
+            }
             hangman.setImageResource(R.drawable.left_0);
             guess_button.setVisibility(View.INVISIBLE);
             letter_input.setVisibility(View.INVISIBLE);
+            if (evil) {
+                editor.putString("game_word_picked", evilgameplay.word_picked);
+            }
             if (high_score) {
                 send_high_score();
             }
@@ -182,41 +225,68 @@ public class GameplayActivity extends Activity {
         else {
             image = "left_" + Integer.toString(amount);
         }
-        int resID = getResources().getIdentifier(image, "drawable", getPackageName());
+        int resID = getResources().getIdentifier(image,
+                "drawable", getPackageName());
         hangman.setImageResource(resID);
     }
 
     // retrieves settings
     private void start_game_preferences() {
         editor = settings.edit();
-        editor.putBoolean("game_evil_mode_on", settings.getBoolean("evil_mode_on", true));
-        editor.putString("game_name", settings.getString("name", "Player001"));
-        editor.putInt("game_word_length", settings.getInt("word_length_value", 9));
-        editor.putInt("game_guesses_allowed", settings.getInt("guesses_allowed_value", 6));
+        editor.putBoolean("game_evil_mode_on",
+                settings.getBoolean("evil_mode_on", true));
+        editor.putString("game_name",
+                settings.getString("name", "Player001"));
+        editor.putInt("game_word_length",
+                settings.getInt("word_length_value", 9));
+        editor.putInt("game_guesses_allowed",
+                settings.getInt("guesses_allowed_value", 6));
         editor.apply();
     }
 
     // saves game progress
     private void set_gamestate_preferences() {
         editor = settings.edit();
-        editor.putString("game_guesses_left", guesses_left.getText().toString());
-        editor.putString("game_letters_tried", letters_tried.getText().toString());
-        editor.putString("game_word_picked", goodgameplay.word_picked);
-        editor.putString("game_word_progress", questionmarks.getText().toString());
+        editor.putString("game_guesses_left",
+                guesses_left.getText().toString());
+        editor.putString("game_letters_tried",
+                letters_tried.getText().toString());
+        if (!evil) editor.putString("game_word_picked",
+                goodgameplay.word_picked);
+        else if (evilgameplay.possible_words.size() == 1) {
+            editor.putString("game_word_picked",
+                    evilgameplay.possible_words.get(0));
+        }
+        editor.putString("game_word_progress",
+                questionmarks.getText().toString());
         editor.apply();
     }
 
     // retrieves game progress
     private void get_gamestate_preferences() {
-        String amount = settings.getString("game_guesses_left", guesses_left.getText().toString());
+        String amount = settings.getString("game_guesses_left",
+                guesses_left.getText().toString());
         guesses_left.setText(amount);
         adjust_picture(Integer.valueOf(amount));
 
-        letters_tried.setText(settings.getString("game_letters_tried", letters_tried.getText().toString()));
-        goodgameplay.word_picked = settings.getString("game_word_picked", goodgameplay.word_picked);
-        set_questionmark_size(goodgameplay.word_picked.length());
+        letters_tried.setText(settings.getString("game_letters_tried",
+                letters_tried.getText().toString()));
+        String word;
+        if (evil) {
+            set_questionmark_size(settings.getInt("game_word_length", 9));
 
-        String word = settings.getString("game_word_progress", goodgameplay.set_questionmarks(false));
+            word = settings.getString("game_word_progress",
+                    evilgameplay.set_questionmarks(false));
+        }
+        else {
+            goodgameplay.word_picked = settings.getString("game_word_picked",
+                    goodgameplay.word_picked);
+            set_questionmark_size(settings.getInt("game_word_length", 9));
+
+            word = settings.getString("game_word_progress",
+                    goodgameplay.set_questionmarks(false));
+        }
+
         questionmarks.setText(word);
         show_picture_at_win(word, false);
         show_word_at_loss(false);
@@ -235,8 +305,11 @@ public class GameplayActivity extends Activity {
             on_off = "Off";
         }
         sb.append(on_off).append(",");
-        sb.append(String.valueOf(settings.getInt("game_word_length", 9))).append(",");
-        String guesses = String.valueOf(settings.getString("game_guesses_left", "1") + "/" + settings.getInt("game_guesses_allowed", 11));
+        sb.append(String.valueOf(settings.getInt
+                ("game_word_length", 9))).append(",");
+        String guesses =
+                String.valueOf(settings.getString("game_guesses_left", "1")
+                        + "/" + settings.getInt("game_guesses_allowed", 11));
         sb.append(guesses).append(",");
         sb.append(settings.getString("game_word_picked", ""));
 

@@ -113,7 +113,7 @@
 
         <SeekBar
             android:id="@+id/word_length_seekbar"
-            android:max="15"
+            android:max="12"
             android:progress="9"
             android:layout_width="125dp"
             android:layout_height="28dp"

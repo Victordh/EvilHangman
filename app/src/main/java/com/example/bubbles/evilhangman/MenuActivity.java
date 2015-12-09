@@ -43,12 +43,14 @@ public class MenuActivity extends Activity {
     }
 
     public void instructions_button_click(View view) {
-        Intent intent = new Intent(MenuActivity.this, InstructionsActivity.class);
+        Intent intent = new Intent(MenuActivity.this,
+                InstructionsActivity.class);
         startActivity(intent);
     }
 
     public void high_scores_button_click(View view) {
-        Intent intent = new Intent(MenuActivity.this, HighScoresActivity.class);
+        Intent intent = new Intent(MenuActivity.this,
+                HighScoresActivity.class);
         startActivity(intent);
     }
 
@@ -60,7 +62,8 @@ public class MenuActivity extends Activity {
     // starts gameplay immediately on first launch
     private void first_time() {
         if (!settings.getBoolean("first_time", false)) {
-            Intent intent = new Intent(MenuActivity.this, GameplayActivity.class);
+            Intent intent = new Intent(MenuActivity.this,
+                    GameplayActivity.class);
             startActivity(intent);
         }
     }

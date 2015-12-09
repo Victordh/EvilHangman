@@ -7,24 +7,26 @@ public abstract class Gameplay {
 
     Context context = GameplayActivity.getContext();
     public static final String PREFERENCES_FILE_NAME = "settings";
-    SharedPreferences settings = context.getSharedPreferences(PREFERENCES_FILE_NAME, 0);
+    SharedPreferences settings =
+            context.getSharedPreferences(PREFERENCES_FILE_NAME, 0);
 
     String word_picked;
     String[] words;
 
     // loads the words into a string array
-    public void load_words(){
-        words = context.getResources().getStringArray(R.array.words);
+    public void load_words() {
+        words =
+                context.getResources().getStringArray(R.array.words);
     }
 
     // returns a string with the correct amount of questionmarks
-    public String set_questionmarks(Boolean new_game){
+    public String set_questionmarks(Boolean new_game) {
         String temp = "?";
         int length;
         if (new_game) {
             length = settings.getInt("word_length_value", 9);
         } else {
-            length = word_picked.length();
+            length = settings.getInt("game_word_length", 9);
         }
         for (Integer i = 1; i < length; i++) {
             temp += " ?";
@@ -40,7 +42,7 @@ public abstract class Gameplay {
             // checks if the character is a letter
             if (l.matches("[A-Z]+")) {
                 // checks with already tried letters
-                if (!tried.contains(l)){
+                if (!tried.contains(l)) {
                     return l;
                 }
             }
@@ -49,7 +51,7 @@ public abstract class Gameplay {
     }
 
     // returns the word placeholders with all non-guessed letters as ?
-    public abstract String letter_in_word_picked(String letter, String questionmarks);
+    public abstract String handle_letter(String letter, String questionmarks);
 
     // returns the current amount of guesses left minus 1
     public int remove_one_guess(String guesses_left) {

@@ -27,8 +27,10 @@ public class InstructionsActivity extends Activity {
 
     private void initialise(){
         settings = this.getSharedPreferences(PREFERENCES_FILE_NAME, 0);
-        instructions_start = (CrayonTextView) findViewById(R.id.instructions_start);
-        instructions_end = (CrayonTextView) findViewById(R.id.instructions_end);
+        instructions_start = (CrayonTextView)
+                findViewById(R.id.instructions_start);
+        instructions_end = (CrayonTextView)
+                findViewById(R.id.instructions_end);
     }
 
     private void set_instructions(){
@@ -43,7 +45,8 @@ public class InstructionsActivity extends Activity {
     }
 
     public void back_to_menu_button_click(View view) {
-        Intent intent = new Intent(InstructionsActivity.this, MenuActivity.class);
+        Intent intent = new Intent(InstructionsActivity.this,
+                MenuActivity.class);
         startActivity(intent);
     }
 }

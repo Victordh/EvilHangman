@@ -9,18 +9,21 @@ public class GoodGameplay extends Gameplay{
 
     Context context = GameplayActivity.getContext();
     public static final String PREFERENCES_FILE_NAME = "settings";
-    SharedPreferences settings = context.getSharedPreferences(PREFERENCES_FILE_NAME, 0);
+    SharedPreferences settings =
+            context.getSharedPreferences(PREFERENCES_FILE_NAME, 0);
 
     // returns a randomly picked word from the dictionary
     public String random_word(){
         do {
             Integer n = new Random().nextInt(words.length);
             word_picked = words[n];
-        } while(word_picked.length() != settings.getInt("word_length_value", 9));
+        } while(word_picked.length() != settings.getInt("word_length_value",
+                9));
         return word_picked;
     }
 
-    public String letter_in_word_picked(String letter, String questionmarks) {
+    // returns the word placeholders with all non-guessed letters as ?
+    public String handle_letter(String letter, String questionmarks) {
         // checks if letter is in the_word
         if (word_picked.contains(letter)) {
             // changes the ?(s) to the correct letter
